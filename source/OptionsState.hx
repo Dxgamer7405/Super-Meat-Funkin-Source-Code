@@ -136,6 +136,7 @@ class OptionsState extends MusicBeatState {
 				//new FreeplayCutscenesOption("Cutscenes like videos and dialogues in Freeplay."),
 				new ResetButtonOption("Toggle pressing R to gameover."),
 				new ChangeKeyBindsOption(),
+				new MobileControls("Change your mobile controls here!"),
 				new CustomizeGameplay("Drag and drop gameplay modules to your prefered positions!")
 			]),
 			new OptionCata(345, 40, "Appearance", [

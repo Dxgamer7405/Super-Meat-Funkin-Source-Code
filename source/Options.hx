@@ -527,6 +527,29 @@ class CustomizeGameplay extends Option {
 	}
 }
 
+#if mobile
+class MobileControls extends Option {
+	public function new(desc:String) {
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool 
+	{
+	  #if mobile 
+	  FlxG.resetState();
+	  removeVirtualPad();
+	  #end
+		openSubState(new mobile.MobileControlsSubState());
+		return false;
+	}
+
+	private override function updateDisplay():String {
+		return "Customize Gameplay";
+	}
+}
+#end
+
 class NoteSplashes extends Option {
 	public function new(desc:String) {
 		super();
