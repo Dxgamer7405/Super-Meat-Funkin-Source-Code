@@ -53,7 +53,7 @@ class MobileControlsSubState extends FlxSubState
 				MobileControls.customVirtualPad = virtualPad;
 
 			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.resetState();
+			FlxG.switchState(new OptionsState());
 		});
 		exitButton.setGraphicSize(Std.int(exitButton.width) * 3);
 		exitButton.label.setFormat(Assets.getFont('assets/mobile/menu/vcr.ttf').fontName, 21, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
@@ -141,11 +141,6 @@ class MobileControlsSubState extends FlxSubState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		if (FlxG.android.justReleased.BACK) 
-		{
-		  FlxG.switchState(new OptionsState());
-		}
 
 		for (touch in FlxG.touches.list)
 		{
