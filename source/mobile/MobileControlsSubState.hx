@@ -142,10 +142,9 @@ class MobileControlsSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
-		if (controls.BACK #if android || FlxG.android.justReleased.BACK #end) 
+		if (FlxG.android.justReleased.BACK) 
 		{
 		  FlxG.switchState(new OptionsState());
-			stopspamming = true;
 		}
 
 		for (touch in FlxG.touches.list)
