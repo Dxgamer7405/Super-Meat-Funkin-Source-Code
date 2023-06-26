@@ -41,10 +41,6 @@
 			"type":"haxelib"
 		},
 		{
-			"name":"faxe",
-			"type":"haxelib"
-		},
-		{
 			"name":"extension-androidtools",
 		  "type":"git",
 		  "ref":"main",
