@@ -303,9 +303,8 @@ class OptionsState extends MusicBeatState {
 		}
 	}
 
-	override function update(elapsed:Float) {
-		super.update(elapsed);
-
+	override function update(elapsed:Float) 
+	{
 		#if android
 		if (virtualPad.buttonC.justPressed) {
 			#if android
@@ -314,6 +313,8 @@ class OptionsState extends MusicBeatState {
 			openSubState(new mobile.MobileControlsSubState());
 		}
 		#end
+		
+		super.update(elapsed);
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
