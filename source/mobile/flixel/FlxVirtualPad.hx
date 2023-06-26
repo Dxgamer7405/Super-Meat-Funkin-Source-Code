@@ -6,11 +6,13 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxTileFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.util.FlxDestroyUtil;
 import mobile.flixel.FlxButton;
 import openfl.display.BitmapData;
 import openfl.utils.Assets;
 
-enum FlxDPadMode {
+enum FlxDPadMode
+{
 	UP_DOWN;
 	LEFT_RIGHT;
 	UP_LEFT_RIGHT;
@@ -20,7 +22,8 @@ enum FlxDPadMode {
 	NONE;
 }
 
-enum FlxActionMode {
+enum FlxActionMode
+{
 	A;
 	B;
 	A_B;
@@ -40,7 +43,8 @@ enum FlxActionMode {
  * @author Ka Wing Chin
  * @author Mihai Alexandru (M.A. Jigsaw)
  */
-class FlxVirtualPad extends FlxSpriteGroup {
+class FlxVirtualPad extends FlxSpriteGroup
+{
 	public var buttonLeft:FlxButton = new FlxButton(0, 0);
 	public var buttonUp:FlxButton = new FlxButton(0, 0);
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
@@ -67,10 +71,12 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	 * @param   DPadMode     The D-Pad mode. `LEFT_FULL` for example.
 	 * @param   ActionMode   The action buttons mode. `A_B_C` for example.
 	 */
-	public function new(DPad:FlxDPadMode, Action:FlxActionMode) {
+	public function new(DPad:FlxDPadMode, Action:FlxActionMode)
+	{
 		super();
 
-		switch (DPad) {
+		switch (DPad)
+		{
 			case UP_DOWN:
 				add(buttonUp = createButton(0, FlxG.height - 255, 'up', 0x00FF00));
 				add(buttonDown = createButton(0, FlxG.height - 135, 'down', 0x00FFFF));
@@ -103,7 +109,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 			case NONE: // do nothing
 		}
 
-		switch (Action) {
+		switch (Action)
+		{
 			case A:
 				add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 'a', 0xFF0000));
 			case B:
@@ -155,40 +162,41 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	/**
 	 * Clean up memory.
 	 */
-	override public function destroy():Void {
+	override public function destroy():Void
+	{
 		super.destroy();
+		buttonLeft = FlxDestroyUtil.destroy(buttonLeft);
+		buttonUp = FlxDestroyUtil.destroy(buttonUp);
+		buttonDown = FlxDestroyUtil.destroy(buttonDown);
+		buttonRight = FlxDestroyUtil.destroy(buttonRight);
 
-		buttonLeft = null;
-		buttonUp = null;
-		buttonDown = null;
-		buttonRight = null;
+                buttonLeft2 = FlxDestroyUtil.destroy(buttonLeft2);
+		buttonUp2 = FlxDestroyUtil.destroy(buttonUp2);
+		buttonDown2 = FlxDestroyUtil.destroy(buttonDown2);
+		buttonRight2 = FlxDestroyUtil.destroy(buttonRight2);
 
-		buttonLeft2 = null;
-		buttonUp2 = null;
-		buttonDown2 = null;
-		buttonRight2 = null;
-
-		buttonA = null;
-		buttonB = null;
-		buttonC = null;
-		buttonD = null;
-		buttonE = null;
-		buttonV = null;
-		buttonX = null;
-		buttonY = null;
-		buttonZ = null;
+		buttonA = FlxDestroyUtil.destroy(buttonA);
+		buttonB = FlxDestroyUtil.destroy(buttonB);
+		buttonC = FlxDestroyUtil.destroy(buttonC);
+		buttonD = FlxDestroyUtil.destroy(buttonD);
+		buttonE = FlxDestroyUtil.destroy(buttonE);
+		buttonV = FlxDestroyUtil.destroy(buttonV);
+		buttonX = FlxDestroyUtil.destroy(buttonX);
+		buttonY = FlxDestroyUtil.destroy(buttonY);
+		buttonZ = FlxDestroyUtil.destroy(buttonZ);
 	}
 
-	private function createButton(X:Float, Y:Float, Graphic:String, Color:Int = 0xFFFFFF):FlxButton {
-		var bitmapData:BitmapData;
+	private function createButton(X:Float, Y:Float, Graphic:String, Color:Int = 0xFFFFFF):FlxButton
+	{
+		var graphic:FlxGraphic;
 
 		if (Assets.exists('assets/mobile/virtualpad/${Graphic}.png'))
-			bitmapData = Assets.getBitmapData('assets/mobile/virtualpad/${Graphic}.png');
+			graphic = FlxG.bitmap.add('assets/mobile/virtualpad/${Graphic}.png');
 		else
-			bitmapData = Assets.getBitmapData('assets/mobile/virtualpad/default.png');
+			graphic = FlxG.bitmap.add('assets/mobile/virtualpad/default.png');
 
 		var button:FlxButton = new FlxButton(X, Y);
-		button.frames = FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), FlxPoint.get(Std.int(bitmapData.width / 3), bitmapData.height));
+		button.frames = FlxTileFrames.fromGraphic(graphic, FlxPoint.get(Std.int(graphic.width / 3), graphic.height));
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();

@@ -582,6 +582,10 @@ class PlayState extends MusicBeatState {
 		flashyWashy.cameras = [camHUD];
 		thing.cameras = [camHUD];
 		daRank.cameras = [camHUD];
+		#if mobile
+		addMobileControls(false);
+    mobileControls.visible = false;
+		#end
 
 		startSong();
 
@@ -672,7 +676,11 @@ class PlayState extends MusicBeatState {
 
 	var songStarted = false;
 
-	function startSong():Void {
+	function startSong():Void 
+	{
+    #if mobile
+    mobileControls.visible = true;
+    #end
 		inCutscene = false;
 		canPause = false;
 
@@ -1149,7 +1157,7 @@ class PlayState extends MusicBeatState {
 			}
 		}
 
-		if (FlxG.keys.justPressed.ENTER && canPause) {
+		if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end && canPause) {
 			persistentUpdate = false;
 			persistentDraw = true;
 			paused = true;
@@ -1476,7 +1484,11 @@ class PlayState extends MusicBeatState {
 		});
 	}
 
-	function endSong():Void {
+	function endSong():Void 
+	{
+    #if mobile
+    mobileControls.visible = false;
+    #end
 		if (FlxG.save.data.fpsCap > 290)
 			(cast(Lib.current.getChildAt(0), Main)).setFPSCap(290);
 

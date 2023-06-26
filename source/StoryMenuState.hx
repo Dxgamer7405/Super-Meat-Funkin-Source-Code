@@ -79,6 +79,10 @@ class StoryMenuState extends MusicBeatState {
 
 		FlxG.camera.zoom += 0.015;
 		
+    #if mobile
+    addVirtualPad(LEFT_FULL, A_B);
+    #end
+		
 		super.create();
 	}
 

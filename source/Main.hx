@@ -35,6 +35,10 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
+    // Crash Handler by MAJigsaw
+		SUtil.uncaughtErrorHandler();
+		SUtil.checkFiles();
+
 		if (stage != null) {
 			init();
 		} else {
