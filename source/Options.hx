@@ -536,11 +536,7 @@ class MobileControls extends Option {
 
 	public override function press():Bool 
 	{
-	  #if mobile 
-	  FlxG.resetState();
-	  removeVirtualPad();
-	  #end
-		openSubState(new mobile.MobileControlsSubState());
+		FlxG.switchState(new mobile.MobileControlsSubState());
 		return false;
 	}
 
