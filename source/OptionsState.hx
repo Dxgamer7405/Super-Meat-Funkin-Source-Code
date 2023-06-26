@@ -132,7 +132,6 @@ class OptionsState extends MusicBeatState {
 			new OptionCata(50, 40, "Gameplay", [
 				new ScrollSpeedOption("Change your scroll speed. (1 = Chart dependent)"),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),
-				new Mobile Controls("Change your mobile controls here!"),
 				new DownscrollOption("Toggle making the notes scroll down rather than up."),
 				//new FreeplayCutscenesOption("Cutscenes like videos and dialogues in Freeplay."),
 				new ResetButtonOption("Toggle pressing R to gameover."),
