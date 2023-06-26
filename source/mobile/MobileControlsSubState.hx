@@ -142,6 +142,12 @@ class MobileControlsSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
+		if (controls.BACK #if android || FlxG.android.justReleased.BACK #end) 
+		{
+		  FlxG.switchState(new OptionsState());
+			stopspamming = true;
+		}
+
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.overlaps(leftArrow) && touch.justPressed)
@@ -232,6 +238,10 @@ class MobileControlsSubState extends FlxSubState
 	{
 		switch (daChoice)
 		{
+			case 'Hitbox':
+				removeControls();
+				hitbox = new FlxHitbox();
+				add(hitbox);
 			case 'Pad-Right':
 				removeControls();
 				virtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
@@ -248,10 +258,6 @@ class MobileControlsSubState extends FlxSubState
 				removeControls();
 				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
 				add(virtualPad);
-			case 'Hitbox':
-				removeControls();
-				hitbox = new FlxHitbox();
-				add(hitbox);
 			default:
 				removeControls();
 		}
