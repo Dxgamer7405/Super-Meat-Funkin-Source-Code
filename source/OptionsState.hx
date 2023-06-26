@@ -8,6 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.addons.transition.FlxTransitionableState;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -136,7 +137,6 @@ class OptionsState extends MusicBeatState {
 				//new FreeplayCutscenesOption("Cutscenes like videos and dialogues in Freeplay."),
 				new ResetButtonOption("Toggle pressing R to gameover."),
 				new ChangeKeyBindsOption(),
-				new MobileControls("Change your mobile controls here!"),
 				new CustomizeGameplay("Drag and drop gameplay modules to your prefered positions!")
 			]),
 			new OptionCata(345, 40, "Appearance", [
@@ -213,7 +213,15 @@ class OptionsState extends MusicBeatState {
 		selectedOption = selectedCat.options[0];
 
 		#if android
-		addVirtualPad(LEFT_FULL, A_B);
+		var tipText:FlxText = new FlxText(10, 14, 0, 'Press C to customize your mobile controls', 16);
+		tipText.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipText.borderSize = 2.4;
+		tipText.scrollFactor.set();
+		add(tipText);
+		#end
+
+		#if android
+		addVirtualPad(LEFT_FULL, A_B_C);
 		#end
 
 		super.create();
@@ -299,6 +307,15 @@ class OptionsState extends MusicBeatState {
 	override function update(elapsed:Float) 
 	{
 		super.update(elapsed);
+
+		#if android
+		if (virtualPad.buttonC.justPressed) {
+			#if android
+			removeVirtualPad();
+			#end
+			openSubState(new android.AndroidControlsSubState());
+		}
+		#end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
