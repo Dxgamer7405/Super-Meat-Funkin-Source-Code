@@ -136,6 +136,7 @@ class OptionsState extends MusicBeatState {
 				//new FreeplayCutscenesOption("Cutscenes like videos and dialogues in Freeplay."),
 				new ResetButtonOption("Toggle pressing R to gameover."),
 				new ChangeKeyBindsOption(),
+				new Mobile Controls("Change your mobile controls here!"),
 				new CustomizeGameplay("Drag and drop gameplay modules to your prefered positions!")
 			]),
 			new OptionCata(345, 40, "Appearance", [
@@ -212,15 +213,7 @@ class OptionsState extends MusicBeatState {
 		selectedOption = selectedCat.options[0];
 
 		#if android
-		var tipText:FlxText = new FlxText(10, 14, 0, 'Press C to customize your android controls', 16);
-		tipText.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		tipText.borderSize = 2.4;
-		tipText.scrollFactor.set();
-		add(tipText);
-		#end
-
-		#if android
-		addVirtualPad(LEFT_FULL, A_B_C);
+		addVirtualPad(LEFT_FULL, A_B);
 		#end
 
 		super.create();
@@ -305,15 +298,6 @@ class OptionsState extends MusicBeatState {
 
 	override function update(elapsed:Float) 
 	{
-		#if android
-		if (virtualPad.buttonC.justPressed) {
-			#if android
-			removeVirtualPad();
-			#end
-			openSubState(new mobile.MobileControlsSubState());
-		}
-		#end
-		
 		super.update(elapsed);
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
