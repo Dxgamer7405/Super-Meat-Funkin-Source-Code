@@ -1,6 +1,7 @@
 package;
 
 import Conductor.BPMChangeEvent;
+import flixel.FlxG;
 import flixel.FlxSubState;
 #if mobile
 import mobile.flixel.FlxVirtualPad;
