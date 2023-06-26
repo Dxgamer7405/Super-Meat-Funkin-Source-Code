@@ -258,14 +258,14 @@ class Controls extends FlxActionSet {
 
 	public function addButtonNOTES(action:FlxActionDigital, button:FlxButton, state:FlxInputState)
 	{
-		var input:FlxActionInputDigitalIFlxInput = new FlxActionInputDigitalIFlxInput(button, state);
+		var input:FlxActionInputDigital = new FlxActionInputDigital(button, state);
 		trackedInputsNOTES.push(input);
 		action.add(input);
 	}
 
 	public function addButtonUI(action:FlxActionDigital, button:FlxButton, state:FlxInputState)
 	{
-		var input:FlxActionInputDigitalIFlxInput = new FlxActionInputDigitalIFlxInput(button, state);
+		var input:FlxActionInputDigital = new FlxActionInputDigital(button, state);
 		trackedInputsUI.push(input);
 		action.add(input);
 	}
